@@ -1,0 +1,13 @@
+# Auto detect text files and normalize to LF in repository
+* text=auto
+
+# Force LF for common files
+*.php     text eol=lf
+*.json    text eol=lf
+*.md      text eol=lf
+*.yml     text eol=lf
+*.yaml    text eol=lf
+bin/*     text eol=lf
+
+# Ensure the CLI script is checked out with LF and executable bit preserved by Git
+bin/generate-mocks.php eol=lf

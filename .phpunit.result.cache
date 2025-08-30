@@ -1,0 +1,1 @@
+{"version":1,"defects":[],"times":{"DtoMockerTest::test_it_creates_dto_mock":0.005,"DtoMockerTest::test_nested_dto_is_generated":0,"DtoMockerTest::test_make_many_returns_multiple_instances":0,"DtoMockerTest::test_constructor_injection_is_supported":0,"DtoMockerTest::test_it_can_extend_with_custom_generator":0}}
