@@ -56,7 +56,20 @@ Opções suportadas:
 - `--out` (padrão: `tests/_fixtures`) — pasta de saída;
 - `--count` (padrão: `3`) — quantas instâncias por classe.
 
-Detecção: o script usa heurística (nome contendo `Dto` ou propriedades tipadas) para identificar DTOs.
+Novas opções:
+- `--format` (json|php) — formato de saída; `json` por padrão;
+- `--include-non-dto` — incluir classes sem sufixo `Dto` (usa detecção por propriedades tipadas);
+- `--only` — lista separada por vírgula de classes (ou short names) a gerar, ex.: `--only=UserDto,App\\Dto\\OrderDto`;
+- `--max-depth` — profundidade máxima de serialização/recursão (padrão: 3).
+
+Detecção: por padrão o script inclui classes cujo nome termina com `Dto`. Use `--include-non-dto` para
+fazer detecção por propriedades tipadas. Use `--only` para restringir a lista a classes específicas.
+
+O que são fixtures
+-------------------
+Fixtures são conjuntos de dados usados para inicializar o estado de testes ou ambientes de desenvolvimento.
+Este projeto gera fixtures em JSON ou PHP (arrays) que podem ser carregados em testes para simular entradas
+ou estados sem depender de banco de dados real.
 
 ## Exemplos de saída
 
