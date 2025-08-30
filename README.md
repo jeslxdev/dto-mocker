@@ -1,9 +1,9 @@
 # DTO Mocker
 
-Gerador leve de mocks para classes DTO/Inputs/Outputs em PHP. Útil para criar fixtures e factories
-para testes unitários, de integração e para popular fixtures de ambiente de desenvolvimento.
+Gerador leve de mocks para classes DTO/Inputs/Outputs em PHP. Gera instâncias e arquivos de
+fixtures para uso em testes e desenvolvimento.
 
-Funciona de forma agnóstica ao framework (Laravel, Hyperf, Symfony etc.).
+Compatível com qualquer framework PHP (Laravel, Hyperf, Symfony etc.).
 
 ## Instalação (desenvolvimento)
 
@@ -29,7 +29,7 @@ $dto = $mocker->make(\App\Dto\UserDto::class);
 var_dump($dto);
 ```
 
-Você pode sobrescrever geradores por tipo:
+Você pode sobrescrever geradores por tipo, por exemplo:
 
 ```php
 $mocker->extend('string', fn() => 'valor_fixo');
@@ -52,23 +52,22 @@ php bin/generate-mocks.php --path=src --out=tests/_fixtures --count=3
 ```
 
 Opções suportadas:
-- `--path` (padrão: `src`) — diretório a ser escaneado em busca de classes;
-- `--out` (padrão: `tests/_fixtures`) — pasta de saída para os arquivos gerados;
-- `--count` (padrão: `3`) — quantas instâncias serão geradas por classe.
+- `--path` (padrão: `src`) — diretório a ser escaneado;
+- `--out` (padrão: `tests/_fixtures`) — pasta de saída;
+- `--count` (padrão: `3`) — quantas instâncias por classe.
 
-O script detecta classes "DTO-like" por heurística (contém `Dto` no nome ou possui propriedades tipadas).
+Detecção: o script usa heurística (nome contendo `Dto` ou propriedades tipadas) para identificar DTOs.
 
 ## Exemplos de saída
 
 O script grava arquivos JSON com nome no formato `Namespace_SubNamespace_ClassName.json`.
 
-Exemplo de uso em testes (PHPUnit): carregue o JSON como fixture e converta para array/objetos conforme precisar.
+Exemplo de uso em testes (PHPUnit): carregue o JSON gerado com `json_decode()` e use os dados como fixtures.
 
 ## Integração com frameworks
 
-Para integração aprimorada (Artisan commands, Hyperf commands, templates de factories PHP) recomendo
-transformar o utilitário em um comando via `symfony/console` e/ou adicionar providers para o framework
-alvo. Posso ajudar a implementar integrações específicas se desejar.
+Para integração com frameworks considere implementar um comando dedicado (Artisan/Hyperf) e templates
+de factories PHP; posso ajudar a adicionar essas integrações.
 
 ## Testes
 
@@ -81,23 +80,9 @@ vendor/bin/phpunit -v
 
 ## Contribuição
 
-Pull requests bem-vindos. Para mudanças maiores, abra uma issue descrevendo a proposta primeiro.
+Pull requests são bem-vindos. Para mudanças maiores, abra uma issue primeiro.
 
-Checklist básico para PRs:
+PR checklist mínimo:
 - testes atualizados e passando;
-- seguir PSR-12 (formatação); 
-- documentação atualizada (README ou docs específicos).
-
-## Licença
-
-MIT — veja o `LICENSE`.
-
-Você pode gerar fixtures JSON a partir dos DTOs do projeto com o script incluido:
-
-```bash
-composer dto-mocker:generate
-# ou diretamente
-php bin/generate-mocks.php --path=src --out=tests/_fixtures --count=3
-```
-
-Opções básicas: `--path`, `--out`, `--count`.
+- seguir PSR-12;
+- atualizar a documentação se necessário.
